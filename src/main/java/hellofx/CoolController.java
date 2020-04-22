@@ -1,14 +1,5 @@
 package hellofx;
 
-import java.awt.image.BufferedImage;
-
-import java.io.File;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-
-import com.sun.javafx.scene.SceneUtils;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,10 +36,13 @@ public class CoolController {
     	datePickerBox.setVisible(false);
     	confirmDate.setVisible(false);
     	popupBackground.setVisible(false);
-    	Image image = new Image(bm.getMostRecentImage());
+    	//Image image = new Image(bm.getMostRecentImage());
     	System.out.println("Pressed");
-    	background.setImage(image);
-
+    	//background.setImage(image);
+    	bm.setDate(datePickerBox.getValue().toString());
+    	System.out.println(datePickerBox.getValue().toString());
+    	Image image = new Image(bm.getImage());
+		background.setImage(image);
     }
     
     @FXML

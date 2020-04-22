@@ -28,6 +28,7 @@ public class BlueMarble {
 	
 	public void setDate(String date) {
 		this.dateAsString = date;
+		//System.out.println(date);
 	}
 	
 	public InputStream getImage() {
