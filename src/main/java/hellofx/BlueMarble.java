@@ -1,3 +1,4 @@
+package hellofx;
 
 
 import java.io.IOException;
@@ -9,8 +10,10 @@ import java.time.LocalDate;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
+import javafx.scene.image.Image;
+
 public class BlueMarble {
-	
+	//https://epic.gsfc.nasa.gov/archive/natural/2015/10/31/png/epic_1b_20151031074844.png
 	private String API_KEY = "7u1nv3v73ROS0u2F65J7w14pnGpjzwCv6cruBzes";
 	private String dateAsString;
 	private String quality = "natural";
