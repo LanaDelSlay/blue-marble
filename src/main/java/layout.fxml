@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -19,9 +20,10 @@
          </image></ImageView>
       <MenuBar prefHeight="29.0" prefWidth="119.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Choose Image">
+          <Menu mnemonicParsing="false" text="Change Image">
             <items>
               <MenuItem fx:id="ChooseImageByDate" mnemonicParsing="false" onAction="#showDatePicker" text="Choose by date" />
+                  <MenuItem fx:id="advancedButton" mnemonicParsing="false" onAction="#showAdvancedMenu" text="Advanced" />
             </items>
           </Menu>
         </menus>
@@ -33,5 +35,6 @@
       </Rectangle>
       <Button fx:id="confirmDate" layoutX="271.0" layoutY="222.0" mnemonicParsing="false" onAction="#confirmDate" text="Confirm" visible="false" />
       <DatePicker fx:id="datePickerBox" layoutX="100.0" layoutY="100.0" visible="false" />
+      <CheckBox fx:id="hdCheckbox" layoutX="79.0" layoutY="227.0" mnemonicParsing="false" text="Check for HD" visible="false" />
    </children>
 </AnchorPane>

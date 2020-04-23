@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
@@ -19,11 +20,24 @@ public class BlueMarble {
 	private String quality = "natural";
 	private String caption;
 	private String nasaImageName;
+	private LocalDate today = java.time.LocalDate.now();
+  //  private Date date = new Date();  
+
 
 	public static InputStream getMostRecentImage() {
 		BlueMarble blueMarble = new BlueMarble();
 		blueMarble.setDate(LocalDate.now().minusDays(1).toString());
 		return blueMarble.getImage();
+	}
+	
+	public LocalDate getDate() {
+		return today;
+	}
+	
+	public boolean isHD() {
+		if (this.quality == "natural") {
+			return false;
+		} else return true;
 	}
 	
 	public void setDate(String date) {
@@ -37,6 +51,7 @@ public class BlueMarble {
 
 			URL url = new URL("https://api.nasa.gov/EPIC/archive/" + quality + "/" + dateAsString.replace('-', '/')
 					+ "/png/" + this.nasaImageName + ".png?api_key=" + API_KEY);
+			System.out.println(url.toString());
 			return url.openStream();
 
 		} catch (Exception e) {
@@ -60,6 +75,9 @@ public class BlueMarble {
 	}
 
 	public void setEnhanced(boolean b) {
-		this.quality = "enhanced";
+		if (b = true) {
+			this.quality = "enhanced";
+		} else this.quality = "natural";
+		
 	}
 }
