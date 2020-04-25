@@ -54,7 +54,7 @@ public class BlueMarbleTest {
 	public void testEnhanced() throws Exception {
 		BlueMarble blueMarble = new BlueMarble();
 		blueMarble.setDate("2018-09-23"); // there are no enhanced images in the database after September 2018
-		blueMarble.setEnhanced(true);
+		//blueMarble.setEnhanced(true);
 		InputStream image = blueMarble.getImage();
 		assertTrue(getFirstLineOfFile(image).contains("PNG"));
 	}

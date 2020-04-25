@@ -1,12 +1,19 @@
 package hellofx;
 
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
@@ -28,21 +35,63 @@ public class BlueMarble {
 		BlueMarble blueMarble = new BlueMarble();
 		blueMarble.setDate(LocalDate.now().minusDays(1).toString());
 		return blueMarble.getImage();
+		
+	}
+	
+	public InputStream specificImage(String date, boolean isHD)  {
+		BlueMarble bm = new BlueMarble();
+		
+		bm.setDate(date);
+		if (isHD) {
+			bm.quality = "enhanced";
+		} 
+		return bm.getImage();
+		
+		
 	}
 	
 	public LocalDate getDate() {
 		return today;
 	}
 	
-	public boolean isHD() {
-		if (this.quality == "natural") {
-			return false;
-		} else return true;
+	public File blackAndWhite(BufferedImage img) {
+
+		try {
+			BufferedImage image = img;
+			 BufferedImage result = new BufferedImage(
+	                    image.getWidth(),
+	                    image.getHeight(),
+	                    BufferedImage.TYPE_INT_RGB);
+
+	            Graphics2D graphic = result.createGraphics();
+	            graphic.drawImage(image, 0, 0, Color.WHITE, null);
+
+	            
+	            for (int i = 0; i < result.getHeight(); i++) {
+	                for (int j = 0; j < result.getWidth(); j++) {
+	                    Color c = new Color(result.getRGB(j, i));
+	                    int red = (int) (c.getRed() * 0.299);
+	                    int green = (int) (c.getGreen() * 0.587);
+	                    int blue = (int) (c.getBlue() * 0.114);
+	                    Color newColor = new Color(
+	                            red + green + blue,
+	                            red + green + blue,
+	                            red + green + blue);
+	                    result.setRGB(j, i, newColor.getRGB());
+	                }
+	            }
+	            File output = new File("/tmp/test.png");
+	            ImageIO.write(result, "png", output);
+	            return output;
+		} catch (IOException e) {
+            e.printStackTrace();
+        }
+		return null;
+		
 	}
 	
 	public void setDate(String date) {
 		this.dateAsString = date;
-		//System.out.println(date);
 	}
 	
 	public InputStream getImage() {
@@ -51,7 +100,6 @@ public class BlueMarble {
 
 			URL url = new URL("https://api.nasa.gov/EPIC/archive/" + quality + "/" + dateAsString.replace('-', '/')
 					+ "/png/" + this.nasaImageName + ".png?api_key=" + API_KEY);
-			System.out.println(url.toString());
 			return url.openStream();
 
 		} catch (Exception e) {
@@ -63,7 +111,7 @@ public class BlueMarble {
 		String metaQueryURL = "https://epic.gsfc.nasa.gov/api/" + quality + "/date/" + dateAsString;
 		InputStream metaInfoStream = new URL(metaQueryURL).openStream();
 		String metaInfoJSON = IOUtils.toString(metaInfoStream, "UTF-8").replace("[", "");
-		System.out.println(metaInfoJSON);
+		//System.out.println(metaInfoJSON);
 		metaInfoStream.close();
 		JSONObject json = new JSONObject(metaInfoJSON);
 		this.nasaImageName = (String) json.get("image");

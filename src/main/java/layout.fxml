@@ -36,5 +36,6 @@
       <Button fx:id="confirmDate" layoutX="271.0" layoutY="222.0" mnemonicParsing="false" onAction="#confirmDate" text="Confirm" visible="false" />
       <DatePicker fx:id="datePickerBox" layoutX="100.0" layoutY="100.0" visible="false" />
       <CheckBox fx:id="hdCheckbox" layoutX="79.0" layoutY="227.0" mnemonicParsing="false" text="Check for HD" visible="false" />
+      <CheckBox fx:id="blackNWhiteCheckbox" layoutX="79.0" layoutY="204.0" mnemonicParsing="false" text="Check for a black and white image" visible="false" />
    </children>
 </AnchorPane>
