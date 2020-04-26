@@ -1,9 +1,13 @@
 package hellofx;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
-
-import org.json.JSONException;
-
+import javax.imageio.ImageIO;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -53,7 +57,7 @@ public class CoolController {
     private AnchorPane warningPopupPane;
 
     @FXML
-    void confirmDate(ActionEvent event) {  
+    void confirmDate(ActionEvent event) throws IOException {  
     	
     	
     	
@@ -78,6 +82,8 @@ public class CoolController {
     		alert.showAndWait();
     	}
     	
+
+    	
     	datePickerBox.setVisible(false);
     	confirmDate.setVisible(false);
     	popupBackground.setVisible(false);
@@ -88,7 +94,17 @@ public class CoolController {
     	bm.setDate(datePickerBox.getValue().toString().replace('-', '/'));
     	System.out.println(datePickerBox.getValue().minusDays(0));
     	Image image = new Image(bm.specificImage(datePickerBox.getValue().toString(), hdCheckbox.isSelected()));
-    	System.out.println(datePickerBox.getValue().minusDays(0));
+        
+    	
+    	if (blackNWhiteCheckbox.isSelected()) {
+    	    BufferedImage buffBoi = ImageIO.read(bm.specificImage(datePickerBox.getValue().toString(), hdCheckbox.isSelected()));
+    		File outputfile = new File("image.png");
+    		bm.blackAndWhite(buffBoi);
+    	    ImageIO.write(buffBoi, "png", outputfile);
+    	    BufferedImage myImg = ImageIO.read(bm.blackAndWhite(buffBoi));
+    	    image = SwingFXUtils.toFXImage(myImg, null);
+    	    background.setImage(image);
+    	}
 		background.setImage(image);
 		hdCheckbox.setSelected(false);
     	blackNWhiteCheckbox.setSelected(false);

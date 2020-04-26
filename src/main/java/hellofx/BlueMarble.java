@@ -12,12 +12,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
-
 import javax.imageio.ImageIO;
-
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
-
 import javafx.scene.image.Image;
 
 public class BlueMarble {
@@ -46,7 +43,6 @@ public class BlueMarble {
 			bm.quality = "enhanced";
 		} 
 		return bm.getImage();
-		
 		
 	}
 	
@@ -80,9 +76,9 @@ public class BlueMarble {
 	                    result.setRGB(j, i, newColor.getRGB());
 	                }
 	            }
-	            File output = new File("/tmp/test.png");
-	            ImageIO.write(result, "png", output);
-	            return output;
+	            File BWoutput = new File("/tmp/test.png");
+	            ImageIO.write(result, "png", BWoutput);
+	            return BWoutput;
 		} catch (IOException e) {
             e.printStackTrace();
         }
