@@ -1,10 +1,8 @@
 package hellofx;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
@@ -81,9 +79,7 @@ public class CoolController {
     		hdCheckbox.setSelected(false);
     		alert.showAndWait();
     	}
-    	
 
-    	
     	datePickerBox.setVisible(false);
     	confirmDate.setVisible(false);
     	popupBackground.setVisible(false);
@@ -92,10 +88,8 @@ public class CoolController {
 
     	try {   		
     	bm.setDate(datePickerBox.getValue().toString().replace('-', '/'));
-    	System.out.println(datePickerBox.getValue().minusDays(0));
     	Image image = new Image(bm.specificImage(datePickerBox.getValue().toString(), hdCheckbox.isSelected()));
         
-    	
     	if (blackNWhiteCheckbox.isSelected()) {
     	    BufferedImage buffBoi = ImageIO.read(bm.specificImage(datePickerBox.getValue().toString(), hdCheckbox.isSelected()));
     		File outputfile = new File("image.png");
@@ -108,7 +102,6 @@ public class CoolController {
 		background.setImage(image);
 		hdCheckbox.setSelected(false);
     	blackNWhiteCheckbox.setSelected(false);
-		//throw new RuntimeException("Chosen date invalid. Date set to the futue");
     	}
 
     	
@@ -130,7 +123,6 @@ public class CoolController {
     		hdCheckbox.setSelected(false);
     		alert.showAndWait();
   		}
-  		
    		}
     	
     }
@@ -156,5 +148,4 @@ public class CoolController {
     	popupBackground.setVisible(true);
     	hdCheckbox.setVisible(true);
     }
-
 }
